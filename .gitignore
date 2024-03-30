@@ -1,3 +1,38 @@
+
+# start private-setting
+.history
+
+# end private-setting
+
+# 画像などの重いファイルを除外
+*.png
+*.jpg
+*.gif
+*.jpeg
+*.bmp
+*.tiff
+*.tif
+*.svg
+*.ico
+*.webp
+*.mp4
+*.avi
+*.mkv
+*.flv
+*.mov
+*.wmv
+*.mpg
+
+#  バイナリファイルを除外 
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
