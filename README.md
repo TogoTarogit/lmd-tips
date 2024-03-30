@@ -2,7 +2,7 @@
 研究や学生生活であると便利なTipsをまとめていきます。
 
 ## 目次
-- [環境構築]
+- 環境構築
 - [ディレクトリ構成](#ディレクトリ構成)
 - GPU monitor
 - pdf utils
@@ -30,7 +30,11 @@ pip install -r requirements.txt
 新しいパッケージなどの追加した際の環境やパッケージの保存方法　in anaconda
 ```
 conda env export > environment.yml
-conda list -e > requirements.txt
+# 環境名を指定
+env_name=myenv
+
+# environment.ymlを更新
+conda env export --name $env_name > environment.yml
 ```
 
 ### ディレクトリ構成
