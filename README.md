@@ -18,7 +18,12 @@ conda env list
 
 ・環境の作成
 ```
-conda create -f environment.yml
+conda env create -f environment.yml
+```
+
+・環境のアクティベート
+```
+conda activate lmd-tips
 ```
 
 ・パッケージのインストール
@@ -28,15 +33,30 @@ pip install -r requirements.txt
 
 
 新しいパッケージなどの追加した際の環境やパッケージの保存方法　in anaconda
-```
+```bash
 conda env export > environment.yml
-# 環境名を指定
-env_name=myenv
-
-# environment.ymlを更新
+env_name=lmd-tips
 conda env export --name $env_name > environment.yml
 ```
 
 ### ディレクトリ構成
 
 ディレクトリ構成は以下の通りです。
+```
+.
+├── README.md
+├── environment.yml
+├── gpu-monitor
+├── pdf-utils
+│   ├── kouza_info.pdf
+│   ├── output_0.jpg
+│   └── trans_pdf_jpeg.py
+├── private-files
+└── requirements.txt
+```
+
+・更新方法
+```bash
+tree
+```
+
