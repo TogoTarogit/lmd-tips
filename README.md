@@ -10,14 +10,26 @@
 ### 環境構築
 コードの実行はすべてanaconda 上での使用を想定しています．
 環境構築は以下の通りです。
-
-
-環境やパッケージの保存方法
-in anaconda
+・anaconda の環境の確認（anaconda 環境が既にあることを想定してます．）
 ```
-<!-- anaconda の保存 -->
+conda env list
+```
+
+
+・環境の作成
+```
+conda create -f environment.yml
+```
+
+・パッケージのインストール
+```
+pip install -r requirements.txt
+```
+
+
+新しいパッケージなどの追加した際の環境やパッケージの保存方法　in anaconda
+```
 conda env export > environment.yml
-<!-- パッケージの保存 -->
 conda list -e > requirements.txt
 ```
 
