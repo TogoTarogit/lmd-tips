@@ -1,0 +1,4 @@
+name: lmd-tips
+channels:
+  - defaults
+prefix: /home/taro_lab_win/anaconda3/envs/lmd-tips
