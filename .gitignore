@@ -1,7 +1,7 @@
 
 # start private-setting
 .history
-
+private-files/*
 # end private-setting
 
 # 画像などの重いファイルを除外
