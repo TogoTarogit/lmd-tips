@@ -52,11 +52,25 @@ def merge_pdfs(directory, pdf_files):
 def main():
     # 使い方と注意点を表示
     usage_and_notes()
-
-    directory = input('指定ディレクトリを入力してください: ')
-    directory = os.path.abspath(directory)
-    print('指定ディレクトリの絶対パス:', directory)
-
+    directory = input("\tディレクトリを入力してください (例：C:\\Users\\username\\AppData\\Roaming\\Box\\) :")
+    if not os.path.isabs(directory):  # If the path is not absolute
+        print('入力されたのは相対パスです:', directory)
+        directory = os.path.abspath(directory)  # Convert to absolute path
+        print('相対パスに対応する絶対パス:', directory)
+    else:  # If the path is absolute
+        print('入力されたのは絶対パスです:', directory)
+    
+    # TODO
+    # unix 環境で実行したプログラムにwindows のパスを渡すとエラーが発生する
+    # 対象プラットフォームの選択とパスの変換を行う必要がある？
+     
+    # ディレクトリが存在しない場合処理を終了
+    if not os.path.exists(directory):
+        print('指定されたディレクトリが存在しません。終了します。')
+        return
+     
+    
+    
     sort_choice = input('PDFファイルの取得方法を選択してください (1: 作成日時順, 2: 名前順): ')
     if sort_choice == '1':
         pdf_files = get_pdf_files_by_creation_time(directory)
