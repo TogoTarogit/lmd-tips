@@ -2,8 +2,12 @@
 # start private-setting
 .history
 private-files/*
+zikkenkiso/seito/*
+zikkenkiso/logs/*
+
 # end private-setting
 
+*.csv
 # 画像などの重いファイルを除外
 *.png
 *.jpg
