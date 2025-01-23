@@ -1,13 +1,17 @@
-import PyPDF2
-import os
-from pathlib import Path
-
+def import_modules():
+    global os, argparse, PyPDF2, Path
+    import os
+    import argparse
+    import PyPDF2
+    from pathlib import Path
+    
 def usage_and_notes():
     print("【使い方】")
     print("1. このプログラムを実行すると、結合したいPDFファイルがあるディレクトリを指定します。")
     print("2. 指定ディレクトリ下のPDFファイルが作成日時順に表示されます。")
     print("3. 結合するかどうかを選択します。yを入力すると結合が開始され、nを入力すると終了します。")
     print("4. 結合したPDFは指定ディレクトリ内のoutputディレクトリに保存されます。")
+    print("実行例: python3 merge_pdf.py -d ./input")
     print()
     print("【注意点】")
     print("- 指定ディレクトリ下に同名のoutputディレクトリが存在する場合、新たに作成されません。")
@@ -52,7 +56,15 @@ def merge_pdfs(directory, pdf_files):
 def main():
     # 使い方と注意点を表示
     usage_and_notes()
-    directory = input("\tディレクトリを入力してください (例：C:\\Users\\username\\AppData\\Roaming\\Box\\) :")
+    # import modules
+    import_modules()
+    
+    
+    parser = argparse.ArgumentParser(description='PDFファイルを結合するスクリプト')
+    parser.add_argument('-d', '--directory', type=str, required=True, help='PDFファイルが格納されているディレクトリ')
+    args = parser.parse_args()
+    directory = args.directory
+    
     if not os.path.isabs(directory):  # If the path is not absolute
         print('入力されたのは相対パスです:', directory)
         directory = os.path.abspath(directory)  # Convert to absolute path
