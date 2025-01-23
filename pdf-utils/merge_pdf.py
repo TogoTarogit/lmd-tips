@@ -61,7 +61,13 @@ def main():
     
     
     parser = argparse.ArgumentParser(description='PDFファイルを結合するスクリプト')
-    parser.add_argument('-d', '--directory', type=str, required=True, help='PDFファイルが格納されているディレクトリ')
+    # 引数を追加
+    parser.add_argument(
+        '-d', '--directory',
+        type=str,
+        default='./',
+        help='PDFファイルが格納されているディレクトリのパス（デフォルト: ./）'
+    )
     args = parser.parse_args()
     directory = args.directory
     
@@ -82,14 +88,14 @@ def main():
         return
      
     while True:
-        sort_choice = input('PDFファイルの取得方法を選択してください (1: 作成日時順, 2: 名前順): ')       
-        if sort_choice == '1':
-            pdf_files = get_pdf_files_by_creation_time(directory)
-            print('発見したPDFファイル名を作成日時順で出力する:')
-            break
-        elif sort_choice == '2':
+        sort_choice = input('PDFファイルの取得方法を選択してください [1: 名前順(default), 2: 作成日時順]: ')
+        if sort_choice == '' or sort_choice == '1':
             pdf_files = get_pdf_files_by_name(directory)
             print('発見したPDFファイル名を名前順で出力する:')
+            break
+        elif sort_choice == '1':
+            pdf_files = get_pdf_files_by_creation_time(directory)
+            print('発見したPDFファイル名を作成日時順で出力する:')
             break
         else:
             print('無効な選択です。もう一度入力してください。')
@@ -98,21 +104,20 @@ def main():
         print(pdf_file)
 
     while True:
-        merge_choice = input('結合してよろしいですか? (y/n): ')
-        if merge_choice.lower() in ['y', 'n']:
+        merge_choice = input('結合してよろしいですか? [Y/n]: ')
+        if merge_choice.lower() in ['y', '']:
+            print('PDFを選択した順序で結合する')
+            merged_pdf_path = merge_pdfs(directory, pdf_files)
+            print('結合したファイルを出力するためのディレクトリ:', merged_pdf_path)
+            print('結合したファイルの順でファイル名を出力する:')
+            for pdf_file in pdf_files:
+                print(pdf_file)
+            break
+        if merge_choice.lower() == 'n':
+            print('結合せずに終了しました')
             break
         else:
             print('無効な選択です。もう一度入力してください。')
-
-    if merge_choice.lower() == 'y':
-        print('PDFを選択した順序で結合する')
-        merged_pdf_path = merge_pdfs(directory, pdf_files)
-        print('結合したファイルを出力するためのディレクトリ:', merged_pdf_path)
-        print('結合したファイルの順でファイル名を出力する:')
-        for pdf_file in pdf_files:
-            print(pdf_file)
-    else:
-        print('結合せずに終了しました')
 
 if __name__ == "__main__":
     main()
