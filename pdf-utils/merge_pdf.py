@@ -81,23 +81,29 @@ def main():
         print('指定されたディレクトリが存在しません。終了します。')
         return
      
-    
-    
-    sort_choice = input('PDFファイルの取得方法を選択してください (1: 作成日時順, 2: 名前順): ')
-    if sort_choice == '1':
-        pdf_files = get_pdf_files_by_creation_time(directory)
-        print('発見したPDFファイル名を作成日時順で出力する:')
-    elif sort_choice == '2':
-        pdf_files = get_pdf_files_by_name(directory)
-        print('発見したPDFファイル名を名前順で出力する:')
-    else:
-        print('無効な選択です。終了します。')
-        return
+    while True:
+        sort_choice = input('PDFファイルの取得方法を選択してください (1: 作成日時順, 2: 名前順): ')       
+        if sort_choice == '1':
+            pdf_files = get_pdf_files_by_creation_time(directory)
+            print('発見したPDFファイル名を作成日時順で出力する:')
+            break
+        elif sort_choice == '2':
+            pdf_files = get_pdf_files_by_name(directory)
+            print('発見したPDFファイル名を名前順で出力する:')
+            break
+        else:
+            print('無効な選択です。もう一度入力してください。')
 
     for pdf_file in pdf_files:
         print(pdf_file)
 
-    merge_choice = input('結合してよろしいですか? (y/n): ')
+    while True:
+        merge_choice = input('結合してよろしいですか? (y/n): ')
+        if merge_choice.lower() in ['y', 'n']:
+            break
+        else:
+            print('無効な選択です。もう一度入力してください。')
+
     if merge_choice.lower() == 'y':
         print('PDFを選択した順序で結合する')
         merged_pdf_path = merge_pdfs(directory, pdf_files)
